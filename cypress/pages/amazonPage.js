@@ -39,8 +39,13 @@ class amazonPage {
             if($element.text().includes(productTitle)) {
                 //cy.log('element found');
                 cy.wrap($element).click();
+                cy.wait(3000);
             }
         });
+    }
+
+    getProductPrice() {
+        return cy.get('.a-spacing-none.aok-align-center > .a-price > [aria-hidden="true"]');
     }
 
     getProductTitle() {
@@ -48,17 +53,28 @@ class amazonPage {
     }
 
     getProductColor() {
-        return cy.get('.selection');
-    }
-
-    getAvailability() {
-        return cy.get('#availability > .a-size-medium');
+        return cy.get('.a-list-item > :nth-child(2)');
     }
 
     addToCart() {
-        //cy.get('#buy-now-button').should('be.visible').click();
-        // cy.get('#buy-now-button').click();
         cy.get('#add-to-cart-button').click();
+        cy.get("#addToCart").submit();
+    }
+
+    getAddToCartMessage() {
+        return cy.get('.a-size-medium-plus');
+    }
+
+    openCartPage() {
+        cy.get('#sw-gtc > .a-button-inner > .a-button-text').click();
+    }
+
+    getProductPriceFromCart() {
+        return cy.get('.sc-item-price-block > .a-spacing-mini > .a-size-medium');
+    }
+
+    getSubTotalPrice() {
+        return cy.get('#sc-subtotal-amount-activecart > .a-size-medium');
     }
 }
 
