@@ -50,6 +50,16 @@ class amazonPage {
     getProductColor() {
         return cy.get('.selection');
     }
+
+    getAvailability() {
+        return cy.get('#availability > .a-size-medium');
+    }
+
+    addToCart() {
+        //cy.get('#buy-now-button').should('be.visible').click();
+        // cy.get('#buy-now-button').click();
+        cy.get('#add-to-cart-button').click();
+    }
 }
 
 export default new amazonPage();
