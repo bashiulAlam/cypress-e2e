@@ -1,0 +1,46 @@
+;FFMETADATA1
+[CHAPTER]
+TIMEBASE=1/1000
+START=-26178
+END=3151
+title=E2E Tests Add to cart
+[CHAPTER]
+TIMEBASE=1/1000
+START=13313
+END=32496
+title=E2E Tests Validate price range
+[CHAPTER]
+TIMEBASE=1/1000
+START=32061
+END=51714
+title=E2E Tests Validate price rangeattempt 1
+[CHAPTER]
+TIMEBASE=1/1000
+START=61692
+END=71426
+title=Price filter test Test with price with decimal point
+[CHAPTER]
+TIMEBASE=1/1000
+START=72028
+END=81165
+title=Price filter test Test with zero price
+[CHAPTER]
+TIMEBASE=1/1000
+START=80932
+END=90306
+title=Price filter test Test with blank input
+[CHAPTER]
+TIMEBASE=1/1000
+START=89354
+END=99685
+title=Price filter test Test with negative price
+[CHAPTER]
+TIMEBASE=1/1000
+START=102420
+END=110020
+title=Price filter test Test with min price greater than max price
+[CHAPTER]
+TIMEBASE=1/1000
+START=108348
+END=117623
+title=Price filter test Test with character input in price
