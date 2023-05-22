@@ -68,7 +68,7 @@ describe('Price filter test', () => {
 
   it('Test with price with decimal point', () => {
     amazonPage.filterWithMinMaxPrice(700.99, 800.99);
-    amazonPage.validateMinAndMaxFieldsAreNonEmpty();
+    amazonPage.validateMinAndMaxFieldsAreNonEmpty(700.99, 800.99);
   });
 
   it('Test with zero price', () => {
