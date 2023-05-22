@@ -66,10 +66,7 @@ class amazonPage {
 
     addToCart() {
         // cy.get('#buybox-see-all-buying-choices .a-button-text').click();
-        // cy.wait(3000);
-        // cy.get('#a-autoid-2-offer-1').click().then(() => {
-        //     cy.log('button clicked');
-        // });
+        // cy.get('#a-autoid-2-offer-1').click();
 
         cy.get('#add-to-cart-button').click();
         //cy.get("#addToCart").submit();
@@ -104,6 +101,21 @@ class amazonPage {
     validateMinAndMaxFieldAreEmpty() {
         cy.get('#low-price').should('have.value', '');
         cy.get('#high-price').should('have.value', '');
+    }
+    
+    validateEmptyMinAndNonEmptyMax(maxPrice) {
+        cy.get('#low-price').should('have.value', '');
+        cy.get('#high-price').should('have.value', maxPrice);
+    }
+
+    validateNonEmptyMinAndEmptyMax(minPrice) {
+        cy.get('#low-price').should('have.value', minPrice);
+        cy.get('#high-price').should('have.value', '');
+    }
+
+    validateMinAndMaxFieldsAreNonEmpty(minPrice, maxPrice) {
+        cy.get('#low-price').should('have.value', minPrice);
+        cy.get('#high-price').should('have.value', maxPrice);
     }
 }
 
