@@ -3,6 +3,7 @@ import testData from "../fixtures/testData.json";
 
 describe('E2E Tests', () => {
   beforeEach(() => {
+    //opens the home page and conducts search with applying all filters
     amazonPage.openHomePage();
     amazonPage.searchWithText(testData.searchText);
     amazonPage.filterWithBrand(testData.brandName);
@@ -11,9 +12,10 @@ describe('E2E Tests', () => {
   });
   
   it('Add to cart', () => {
-    
+    //open the product page and add product to cart 
     amazonPage.openProductPage(testData.productTitle);
 
+    //validate correct product page has been opened
     amazonPage.getProductTitle().then((title) => {
       let text = title.text();
       cy.log('Product title : ' + text);
@@ -28,6 +30,7 @@ describe('E2E Tests', () => {
     });
 
     amazonPage.addToCart();
+    //validate successful cart addition by checking the success message
     amazonPage.getAddToCartMessage().then((message) => {
       let text = message.text();
       cy.log('Add to cart message : ' + text);
@@ -35,12 +38,14 @@ describe('E2E Tests', () => {
     });
 
     amazonPage.openCartPage();
+    //validate product price from cart
     amazonPage.getProductPriceFromCart().then((price) => {
       let text = price.text();
       cy.log('Product price from cart : ' + text);
       expect(text === productPrice).to.be.true;
     });
 
+    //validate total price from cart
     amazonPage.getSubTotalPrice().then((price) => {
       let text = price.text();
       cy.log('Sub total price from cart : ' + text);
@@ -49,6 +54,7 @@ describe('E2E Tests', () => {
   });
 
   it('Validate price range', () => {
+    //check from search results if any product not falling into price filter criteria is present
     amazonPage.getPriceListFromSearch();
   });
 });
@@ -57,11 +63,12 @@ describe('Price filter test', () => {
   beforeEach(() => {
     amazonPage.openHomePage();
     amazonPage.searchWithText(testData.searchText);
+    amazonPage.filterWithBrand(testData.brandName);
   });
 
   it('Test with price with decimal point', () => {
     amazonPage.filterWithMinMaxPrice(700.99, 800.99);
-    amazonPage.validateMinAndMaxFieldAreEmpty();
+    amazonPage.validateMinAndMaxFieldsAreNonEmpty();
   });
 
   it('Test with zero price', () => {
@@ -88,4 +95,13 @@ describe('Price filter test', () => {
     amazonPage.filterWithMinMaxPrice('ABC', 'DEF');
     amazonPage.validateMinAndMaxFieldAreEmpty();
   });
+  
+  it('Test with empty value in min and non empty value in max field', () => {
+    amazonPage.filterWithMinMaxPrice(' ', 800);
+    amazonPage.validateEmptyMinAndNonEmptyMax(800);
+  });
+
+  it('Test with non empty value in min and empty value in max field', () => {
+    amazonPage.filterWithMinMaxPrice(800, ' ');
+    amazonPage.validateNonEmptyMinAndEmptyMax(800);
 });
